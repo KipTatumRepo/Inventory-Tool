@@ -29,7 +29,7 @@
 				</GridView>
 			</ListView.View>
 		</ListView>
-		<Button x:Name="removeButton" Grid.Row="0" Content="Remove One" HorizontalAlignment="Right" Margin="0,169,10,0" VerticalAlignment="Top" Command="{Binding RemoveOne}" FontSize="11"/>
+		<Button x:Name="removeButton" Content="Remove One" Grid.Row="0" HorizontalAlignment="Right" Margin="0,169,10,0" VerticalAlignment="Top" Command="{Binding RemoveOne}" FontSize="11" />
 		<Expander x:Name="expander" Background="White" Grid.Row="1" Header="Add Item" HorizontalAlignment="Stretch" Height="111" Margin="10,10,10,0" VerticalAlignment="Top" IsExpanded="True">
 			<Grid>
 				<Grid.RowDefinitions>
@@ -53,7 +53,7 @@
 				</TextBox>
 				<TextBlock Visibility="{Binding ElementName=itemTextBox, Path=(Validation.Errors), Converter={StaticResource LabelVisibility}}" Grid.Column="1" Grid.Row="1" Foreground="Red" >
 					<TextBlock.Text>
-						<Binding ElementName="itemTextBox" Path="(Validation.Errors)[0].ErrorContent"/>
+						<Binding ElementName="itemTextBox" Path="(Validation.Errors)[0].ErrorContent" />
 					</TextBlock.Text>
 				</TextBlock>
 				<Button x:Name="addButton" Content="Add Item" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Top" Grid.Column="1" Command="{Binding AddItem}" />

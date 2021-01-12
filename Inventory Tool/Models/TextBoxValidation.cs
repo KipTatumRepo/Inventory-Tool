@@ -20,9 +20,12 @@ namespace Inventory_Tool
 				{
 					return ValidationResult.ValidResult;
 				}
+				else
+				{
+					return new ValidationResult(false, ErrMessage);
+				}
 			}
-			
-			return new ValidationResult(false, ErrMessage);
+			return ValidationResult.ValidResult;
 		}
 	}
 }

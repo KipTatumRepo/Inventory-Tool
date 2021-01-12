@@ -12,6 +12,7 @@ namespace Inventory_Tool
 		private ObservableCollection<InventoryItem> _inventoryItems;
 		private ICommand _addItem;
 		private ICommand _removeOne;
+		
 
 		public InventoryItem Item
 		{
