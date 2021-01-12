@@ -1,0 +1,62 @@
+﻿<Window x:Class="Inventory_Tool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Inventory_Tool"
+        mc:Ignorable="d"
+        Title="Inventory Tool" Height="385" Width="300">
+	<Window.Resources>
+		<local:ViewModel x:Key="ViewModel"/>
+		<local:ErrorVisibility x:Key="LabelVisibility"/>
+	</Window.Resources>
+	<Grid DataContext="{Binding Source={StaticResource ViewModel}}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="225"/>
+			<RowDefinition Height="225"/>
+		</Grid.RowDefinitions>
+		<ListView x:Name="itemListView" ItemsSource="{Binding InventoryItems}" Grid.Row="0" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,10,60" VerticalAlignment="Stretch" SelectedItem="{Binding SelectedItem}">
+			<ListView.Resources>
+				<Style TargetType="GridViewColumnHeader">
+					<Setter Property="Visibility" Value="Collapsed"/>
+				</Style>
+			</ListView.Resources>
+			<ListView.View>
+				<GridView>
+					<GridViewColumn DisplayMemberBinding="{Binding Name}" Width="100" />
+					<GridViewColumn DisplayMemberBinding="{Binding ItemCount}" Width="100" />
+				</GridView>
+			</ListView.View>
+		</ListView>
+		<Button x:Name="removeButton" Grid.Row="0" Content="Remove One" HorizontalAlignment="Right" Margin="0,169,10,0" VerticalAlignment="Top" Command="{Binding RemoveOne}" FontSize="11"/>
+		<Expander x:Name="expander" Background="White" Grid.Row="1" Header="Add Item" HorizontalAlignment="Stretch" Height="111" Margin="10,10,10,0" VerticalAlignment="Top" IsExpanded="True">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" MinHeight="36"/>
+					<RowDefinition/>
+					<RowDefinition Height="Auto" MinHeight="29"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Label x:Name="nameLabel" Grid.Column="0" Grid.Row="0" Content="Name:" HorizontalAlignment="Left" Margin="10,0,0,10" Width="44"/>
+				<TextBox x:Name="itemTextBox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Height="23" Margin="0,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top">
+					<TextBox.Text>
+						<Binding Path="InputName" UpdateSourceTrigger="PropertyChanged">
+							<Binding.ValidationRules>
+								<local:TextBoxValidation x:Name="NonEmptyTextBox" ValidatesOnTargetUpdated="True" ErrMessage="This has an error!" />
+							</Binding.ValidationRules>
+						</Binding>
+					</TextBox.Text>
+				</TextBox>
+				<TextBlock Visibility="{Binding ElementName=itemTextBox, Path=(Validation.Errors), Converter={StaticResource LabelVisibility}}" Grid.Column="1" Grid.Row="1" Foreground="Red" >
+					<TextBlock.Text>
+						<Binding ElementName="itemTextBox" Path="(Validation.Errors)[0].ErrorContent"/>
+					</TextBlock.Text>
+				</TextBlock>
+				<Button x:Name="addButton" Content="Add Item" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Top" Grid.Column="1" Command="{Binding AddItem}" />
+			</Grid>
+		</Expander>
+	</Grid>
+</Window>
