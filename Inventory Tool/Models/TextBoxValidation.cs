@@ -14,6 +14,7 @@ namespace Inventory_Tool
 		public override ValidationResult Validate(object value, CultureInfo cultureInfo)
 		{
 			string input = (string)value;
+			
 			if (input != null)
 			{
 				if (input.Length > 0)

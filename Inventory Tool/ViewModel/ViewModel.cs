@@ -98,15 +98,19 @@ namespace Inventory_Tool
 		private void AddItemToList()
 		{
 			
-			if (InventoryItems.Any(p => p.Name == InputName))
+			if (InventoryItems.Any(p => p.Name == InputName) && InventoryItems.Count > 0)
 			{
 				InventoryItems.First(x => x.Name == InputName).ItemCount++;
 			}
 			else
 			{
+				if (string.IsNullOrEmpty(InputName))
+				{
+					MessageBox.Show("Please enter an item in the text box");
+					return;
+				}
 				InventoryItems.Add(new InventoryItem() { Name = InputName, ItemCount = 1 });
 			}
-			
 			Item = new InventoryItem();
 		}
 
