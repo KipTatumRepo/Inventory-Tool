@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Inventory_Tool"
         mc:Ignorable="d"
+		WindowStartupLocation="CenterScreen"
         Title="Inventory Tool" Height="385" Width="300">
 	<Window.Resources>
 		<local:ViewModel x:Key="ViewModel"/>
